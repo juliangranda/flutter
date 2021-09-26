@@ -5,6 +5,8 @@ class HomePage extends StatelessWidget{
 
   final estiloTexto = new TextStyle(fontSize: 30);
 
+  final conteo = 10;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +20,7 @@ class HomePage extends StatelessWidget{
 
           children: <Widget>[
             Text('numero de clicks:', style:estiloTexto),
-            Text('0', style:estiloTexto),
+            Text('$conteo', style:estiloTexto),
           ],
         )
       ),
