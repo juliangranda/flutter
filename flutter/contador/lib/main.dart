@@ -1,6 +1,7 @@
 //atajos
 //importM
 //cntl + . sobre la clase o variable de interes
+//alt + click para ver la informacion de la clase o widget
 
 
 import 'package:flutter/material.dart';
