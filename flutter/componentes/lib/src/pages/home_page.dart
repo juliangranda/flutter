@@ -11,27 +11,48 @@ class HomePage extends StatelessWidget {
         title: Text('Componentes'),
       ),
       body: _lista(),
-
     );
   }
 
   Widget _lista() {
-
-    print(menuProvider.opciones);
-
-    return ListView(
-      children: _listaItems(),
+    //print(menuProvider.opciones);
+    //menuProvider.cargarData()
+    return FutureBuilder(
+      future: menuProvider.cargarData(),
+      initialData: [],
+      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+        //print('builder');
+        //print(snapshot.data);
+        return ListView(
+          children: _listaItems(snapshot.data),
+        );
+      },
     );
+
+    //return ListView(
+    //  children: _listaItems(),
+    //);
   }
 
-  List<Widget> _listaItems() {
+  List<Widget> _listaItems(List<dynamic>? data) {
 
-    return [
-      ListTile(title: Text('hola mundo')),
-      Divider(),
-      ListTile(title: Text('hola mundo')),
-      Divider(),
-      ListTile(title: Text('hola mundo')),
-    ];
+    final List<Widget> opciones = [];
+    if(data!= null){
+          data.forEach((opt) {
+
+      final widgetTemp = ListTile(
+        title: Text(opt['texto']),
+        leading: Icon(Icons.account_circle, color: Colors.blue),
+        trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
+        onTap: (){
+
+        },
+      );
+
+      opciones..add(widgetTemp)..add(Divider());
+     });
+    }
+
+     return opciones;
   }
 }

@@ -16,7 +16,7 @@ class _MenuProvider{
     
 //data hay que convertirlo en un Map pq este viene en forma de string entonces no me sirve para trabajarlo por lo que necesito convertirlo a un Map
       Map dataMap = json.decode(resp);
-      print(dataMap['rutas']);
+      //print(dataMap['rutas']);
       opciones = dataMap['rutas'];
       return opciones;
     
