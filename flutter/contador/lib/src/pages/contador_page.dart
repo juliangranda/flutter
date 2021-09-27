@@ -47,22 +47,25 @@ class _ContadorPageState extends State<ContadorPage>{
           ],
         )
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon( Icons.add),
-        onPressed: () {
-
-          //print('hola mundo');
-          _conteo++;
-
-          //setstate lo que hace es redibujar el widget.
-          //por que usar esto ps sin este basicamente nos toca hacer hot reload (rayito) para ver el cambio en el contador
-          //mientras que si usamos el setstate
-          setState(() {
-            
-          });
-        },
-      ),
+      floatingActionButton: _crearBotones()
      
     );
+  }
+
+
+//este widget lo estamos haciendo para dejar el codigo mas ordenado y legible para que no sea tan dificil de leer
+  Widget _crearBotones(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+      SizedBox(width: 30),
+      FloatingActionButton(onPressed: () {  }, child: Icon(Icons.exposure_zero)),
+      Expanded(child: SizedBox()),
+      FloatingActionButton(onPressed: () {  }, child: Icon(Icons.remove)),
+      SizedBox(width: 5.0),
+      FloatingActionButton(onPressed: () {  }, child: Icon(Icons.add)),
+    ],);
+    
+    
   }
 }
