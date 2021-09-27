@@ -13,9 +13,19 @@ class CardPage extends StatelessWidget {
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
           _cardTipo1(),
-          SizedBox(height: 30.0,),
+          SizedBox(
+            height: 30.0,
+          ),
           _cardTipo2(),
-          ],
+          SizedBox(
+            height: 30.0,
+          ),
+          _cardTipo1(),
+          SizedBox(
+            height: 30.0,
+          ),
+          _cardTipo2(),
+        ],
       ),
     );
   }
@@ -23,7 +33,7 @@ class CardPage extends StatelessWidget {
   Widget _cardTipo1() {
     return Card(
       elevation: 10.0,
-      shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -50,23 +60,22 @@ class CardPage extends StatelessWidget {
   }
 
   Widget _cardTipo2() {
-
     final card = Container(
       //clipBehavior: Clip.antiAlias,
       child: Column(
         children: <Widget>[
-
 //nota: las imagenes son se pueden importar de una en el archivo toca primero añadirla en la parte de assets del archivo pubspec.yaml
 /*
 la fadeInimage se usa para cuando hay una demora en la aplicacion para cargar una imagen entonces se ve feo o algo por el estilo,
 entonces se usa este para tener una imagen de fondo en caso de que se demore mucho en cargar
 */
           FadeInImage(
-            image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg'),
+            image: NetworkImage(
+                'https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg'),
             placeholder: AssetImage('assets/jar-loading.gif'),
-            fadeInDuration: Duration( milliseconds: 100),
+            fadeInDuration: Duration(milliseconds: 100),
             height: 300.0,
-            fit:BoxFit.cover,
+            fit: BoxFit.cover,
           ),
 
 /*           Image(
@@ -75,31 +84,27 @@ entonces se usa este para tener una imagen de fondo en caso de que se demore muc
           ), */
 
           Container(
-            padding: EdgeInsets.all(10.0),
-            child: Text('No tengo de que poner')
-            ),
+              padding: EdgeInsets.all(10.0),
+              child: Text('No tengo de que poner')),
         ],
       ),
     );
     return Container(
-      
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        color: Colors.white,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 10.0,
-            spreadRadius: 2.0,
-            //offset mirarlo como un plano cartesiano es el encargado de por asi decirlo mover el container o carta atraves del telefono
-            offset: Offset(0,0),
+          borderRadius: BorderRadius.circular(30.0),
+          color: Colors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+              //offset mirarlo como un plano cartesiano es el encargado de por asi decirlo mover el container o carta atraves del telefono
+              offset: Offset(0, 0),
             )
-        ]
-        
-      ),
+          ]),
       //clipRRect nos permite recortar todo lo que este por fuera del Container
       child: ClipRRect(
-        borderRadius:BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(30.0),
         child: card,
       ),
     );
