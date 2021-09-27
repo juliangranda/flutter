@@ -22,6 +22,8 @@ class CardPage extends StatelessWidget {
 
   Widget _cardTipo1() {
     return Card(
+      elevation: 10.0,
+      shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -49,7 +51,8 @@ class CardPage extends StatelessWidget {
 
   Widget _cardTipo2() {
 
-    return Card(
+    final card = Container(
+      //clipBehavior: Clip.antiAlias,
       child: Column(
         children: <Widget>[
 
@@ -76,6 +79,28 @@ entonces se usa este para tener una imagen de fondo en caso de que se demore muc
             child: Text('No tengo de que poner')
             ),
         ],
+      ),
+    );
+    return Container(
+      
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+        color: Colors.white,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10.0,
+            spreadRadius: 2.0,
+            //offset mirarlo como un plano cartesiano es el encargado de por asi decirlo mover el container o carta atraves del telefono
+            offset: Offset(0,0),
+            )
+        ]
+        
+      ),
+      //clipRRect nos permite recortar todo lo que este por fuera del Container
+      child: ClipRRect(
+        borderRadius:BorderRadius.circular(30.0),
+        child: card,
       ),
     );
   }
