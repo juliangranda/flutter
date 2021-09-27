@@ -17,14 +17,14 @@ class MyApp extends StatelessWidget {
       //definimos las rutas de navegacion
       initialRoute: '/',
       routes: getApplicationRoutes(),
-
+      /*
       onGenerateRoute: ( RouteSettings settings ){
 
         print( ' ruta llamada: ${ settings.name}');
           return MaterialPageRoute(
             builder: (BuildContext context) => AlertPage()
           );
-      },
+      },*/
 
     );
   }
