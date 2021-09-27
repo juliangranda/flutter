@@ -49,12 +49,16 @@ class HomePage extends StatelessWidget {
         trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
         onTap: (){
           
+          
+
+          Navigator.pushNamed(context, opt['ruta']);
+
           //navegacion entre pantallas
-          final route = MaterialPageRoute(
+/*           final route = MaterialPageRoute(
             builder: (context)=> AlertPage()
             
           );
-          Navigator.push(context, route);
+          Navigator.push(context, route); */
         },
       );
 
