@@ -5,8 +5,25 @@ class HomePageTemp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child:Text('Home Temp')
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Componentes temp'),
+      ),
+      body: ListView(
+        children: <Widget>[
+          ListTile(
+            title: Text('listtile title'),
+          ),
+          Divider(),
+          ListTile(
+            title: Text('listtile title'),
+          ),
+          Divider(),
+          ListTile(
+            title: Text('listtile title'),
+          ),
+        ],
+      ),
     );
   }
 }
