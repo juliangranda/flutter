@@ -35,6 +35,7 @@ class AlertPage extends StatelessWidget {
         barrierDismissible: true,
         builder: (context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0) ),
             title: Text('Titulo'),
             content: Column(
               //evitar tarjeta se estire demasiado, en este caso mainaxissize dice que se adapte al contenido minimo que halla
