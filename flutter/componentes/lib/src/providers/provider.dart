@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart' show rootBundle;
 class _MenuProvider{
 
@@ -7,14 +9,17 @@ class _MenuProvider{
     cargarData();
   }
 
-  cargarData() {
+  Future<List<dynamic>> cargarData() async{
 
-    rootBundle.loadString('data/menu_opts.json')
-    //data hay que convertirlo en un Map pq este viene en forma de string entonces no me sirve para trabajarlo por lo que necesito convertirlo a un Map
-    .then( (data){
-
-      print(data);
-    });
+    final resp = await rootBundle.loadString('data/menu_opts.json');
+    
+    
+//data hay que convertirlo en un Map pq este viene en forma de string entonces no me sirve para trabajarlo por lo que necesito convertirlo a un Map
+      Map dataMap = json.decode(resp);
+      print(dataMap['rutas']);
+      opciones = dataMap['rutas'];
+      return opciones;
+    
   }
 }
 
