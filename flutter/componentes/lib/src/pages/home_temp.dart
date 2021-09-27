@@ -12,8 +12,8 @@ class HomePageTemp extends StatelessWidget {
         title: Text('Componentes temp'),
       ),
       body: ListView(
-        children: _crearItems()
-        
+        //children: _crearItems()
+        children: _crarItemsCorta()
       ),
     );
   }
@@ -35,5 +35,26 @@ class HomePageTemp extends StatelessWidget {
       
     }
     return lista;
+  }
+
+  List<Widget> _crarItemsCorta(){
+
+      return  opciones.map(( item ){
+
+          return Column(
+            children: [
+              ListTile(
+                title: Text( item + '!'),
+                subtitle: Text('Cualquier cosa'),
+                leading: Icon( Icons.account_balance_wallet),
+                trailing: Icon(Icons.keyboard_arrow_right),
+                onTap: (){},
+              ),
+              Divider()
+            ],
+          );
+          //se usa el .tolist pq lo que esta entregando en widgets es una LIstTile iterable entonces se debe de convertir a una lista normal
+      }).toList();
+    
   }
 }
