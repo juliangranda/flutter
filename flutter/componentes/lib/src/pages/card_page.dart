@@ -11,7 +11,11 @@ class CardPage extends StatelessWidget {
       ),
       body: ListView(
         padding: EdgeInsets.all(10.0),
-        children: <Widget>[_cardTipo1()],
+        children: <Widget>[
+          _cardTipo1(),
+          SizedBox(height: 30.0,),
+          _cardTipo2(),
+          ],
       ),
     );
   }
@@ -38,6 +42,39 @@ class CardPage extends StatelessWidget {
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _cardTipo2() {
+
+    return Card(
+      child: Column(
+        children: <Widget>[
+
+//nota: las imagenes son se pueden importar de una en el archivo toca primero añadirla en la parte de assets del archivo pubspec.yaml
+/*
+la fadeInimage se usa para cuando hay una demora en la aplicacion para cargar una imagen entonces se ve feo o algo por el estilo,
+entonces se usa este para tener una imagen de fondo en caso de que se demore mucho en cargar
+*/
+          FadeInImage(
+            image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg'),
+            placeholder: AssetImage('assets/jar-loading.gif'),
+            fadeInDuration: Duration( milliseconds: 100),
+            height: 300.0,
+            fit:BoxFit.cover,
+          ),
+
+/*           Image(
+            image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg'),
+            
+          ), */
+
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text('No tengo de que poner')
+            ),
         ],
       ),
     );
