@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 class InputPage extends StatefulWidget {
@@ -11,6 +13,9 @@ class _InputPageState extends State<InputPage> {
 
   String _nombre = '';
   String _email = '';
+  String _fecha = '';
+
+  TextEditingController _inputFieldDateController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +31,8 @@ class _InputPageState extends State<InputPage> {
           _crearEmail(),
           Divider(),
           _password(),
+          Divider(),
+          _crearFecha(context),
           Divider(),
           _crearPersona(),
           
@@ -63,6 +70,31 @@ class _InputPageState extends State<InputPage> {
         //print(_nombre);
       },
     );
+  }
+
+  _selectDate(BuildContext context) async{
+
+//aqui se usa un async await pq esta esperando un FUTURE de la funcion showdatepicker
+
+ 
+    DateTime? picked = await showDatePicker(
+      context: context,
+       initialDate: new DateTime.now(),
+       firstDate: new DateTime(2018),
+        lastDate: new DateTime(2025)
+        locale: Locale('es', 'ES')
+        );
+
+        if(picked != null){
+          setState(() {
+            _fecha = picked.toString();
+            
+            //se creo una variable para el controlador que va a modificar el texto y aparte se utilizo la propiedad controller en crear fecha para
+            //manejar una relacion entre el calendario y el textfield para intercambiar informacion
+            _inputFieldDateController.text = _fecha;
+
+          });
+        }
   }
 
   Widget _crearPersona() {
@@ -111,7 +143,7 @@ class _InputPageState extends State<InputPage> {
 
         hintText: 'password',
         labelText: 'password',
-        helperText: 'solo es la password',
+        
         suffixIcon: Icon(Icons.lock),
         icon: Icon(Icons.lock)
       ),
@@ -121,6 +153,34 @@ class _InputPageState extends State<InputPage> {
         setState(() => _email = valor);
         
         //print(_nombre);
+      },
+    );
+  }
+
+  Widget _crearFecha(BuildContext context) {
+
+    return TextField(
+      enableInteractiveSelection: false,
+
+      //controller: relacion entre inputfield y el calendario para mandar datos
+      controller:  _inputFieldDateController,
+
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+
+        hintText: 'fecha nacimiento',
+        labelText: 'fecha nacimiento',
+        
+        suffixIcon: Icon(Icons.perm_contact_cal),
+        icon: Icon(Icons.calendar_today)
+      ),
+      onTap: (){
+
+        FocusScope.of(context).requestFocus(new FocusNode());
+        //se le añade el context pq puede que llegue a necesitar crear algo en pantalla dinamicamente y flutter necesita saber en que posicion colocarla
+        _selectDate(context);
       },
     );
   }
