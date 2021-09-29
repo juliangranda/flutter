@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/providers/movies_provider.dart';
 import 'package:peliculas/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   //const DetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+                                      //especifica cual provider
+    final moviesProvider = Provider.of<MoviesProvider>(context);
+    //print(moviesProvider.onDisplayMovies);
     return Scaffold(
       appBar: AppBar(title: Text('peliculas en cines'), elevation: 0, actions: [
         IconButton(
@@ -18,8 +23,8 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             //cardSwiper
-            CardSwiper(),
-
+            CardSwiper( movies: moviesProvider.onDisplayMovies),
+            
             //listado horizontal de peliculas
             MovieSlider(),
             
