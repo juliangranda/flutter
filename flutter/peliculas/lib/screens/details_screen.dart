@@ -13,7 +13,13 @@ class DetailsScreen extends StatelessWidget {
       body: CustomScrollView(
         //son widgets que tienen cierto comportamiento programado cuando se hace scroll en el container o pantalla o pagina donde se encuentra
         slivers: [
-          _CustomAppBar()
+          _CustomAppBar(),
+          //slivers no aceptan widget de texto u otros por lo que toca usar sliverChildListDelegate para que nos genere una lista de widgets
+          SliverList(
+            delegate: SliverChildListDelegate([
+              _PosterAndTitle(),
+            ]),
+            )
         ],
       ),
     );
@@ -49,6 +55,52 @@ class _CustomAppBar extends StatelessWidget {
         ),
       ),
 
+    );
+  }
+}
+
+class _PosterAndTitle extends StatelessWidget {
+  //const _PosterAndTitle({Key? key}) : super(key: key);
+
+  
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      margin: EdgeInsets.only(top:20),
+      padding: EdgeInsets.symmetric(horizontal:20),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: FadeInImage(
+              height: 150,
+              placeholder: AssetImage('assets/no-image.jpg'),
+              image: NetworkImage('https://via.placeholder.com/200x300')),
+              
+               
+          ),
+          SizedBox(width: 20),
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              
+              Text('movie.title',style: textTheme.headline5, overflow: TextOverflow.ellipsis, maxLines: 2 ),
+              Text('movie.originalTitle',style: textTheme.subtitle1, overflow: TextOverflow.ellipsis, maxLines: 1 ),
+
+              Row(
+                children: [
+                  Icon(Icons.star_outline, size:15, color: Colors.grey),
+                  SizedBox(width: 5),
+                  Text('movie.voteAverage', style: textTheme.caption)
+                ],
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
