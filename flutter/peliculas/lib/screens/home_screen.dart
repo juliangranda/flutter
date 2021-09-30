@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/providers/movies_provider.dart';
+import 'package:peliculas/search/search_delegate.dart';
 import 'package:peliculas/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(title: Text('peliculas en cines'), elevation: 0, actions: [
         IconButton(
           icon: Icon(Icons.search_off_outlined),
-          onPressed: () {},
+          onPressed: () => showSearch(context: context, delegate: MovieSearchDelegate()),
         )
       ]),
       //singleChildScrollView lo que hace es permitinos pasarnos el tamaño de la pantalla es parecido a tener una listView por asi decirlo                             
