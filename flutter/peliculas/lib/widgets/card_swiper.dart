@@ -12,7 +12,7 @@ class CardSwiper extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final size = MediaQuery.of(context).size;
-/*
+
     if( this.movies.length == 0){
       return Container(
         width: double.infinity,
@@ -21,7 +21,7 @@ class CardSwiper extends StatelessWidget {
           child: CircularProgressIndicator(),
         ),
       );
-    }*/
+    }
 
     return Container(
       //toma todo el ancho posible
