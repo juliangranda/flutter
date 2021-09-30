@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   //const DetailsScreen({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
                                       //especifica cual provider
