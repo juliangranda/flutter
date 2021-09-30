@@ -59,7 +59,7 @@ class MovieSearchDelegate extends SearchDelegate{
     print('peticionhttp');
     
     final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
-
+    moviesProvider.getSuggestionByQuery( query );
 
     return StreamBuilder(
       stream: moviesProvider.suggestionStream,
@@ -76,14 +76,13 @@ class MovieSearchDelegate extends SearchDelegate{
       }
       );
 
-  }
-
-  void getSuggestionByQuery(String searchTerm){
-    
 
   }
+
+
 
 }
+
 
 class _MovieItem extends StatelessWidget {
   final Movie movie;
