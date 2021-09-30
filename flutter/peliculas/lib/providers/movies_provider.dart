@@ -1,10 +1,12 @@
 //services - ser proveedor de informacion eso es un provider
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 //importamos http
 import 'package:http/http.dart' as http;
+import 'package:peliculas/helpers/debouncer.dart';
 import 'package:peliculas/modals/modals.dart';
 import 'package:peliculas/modals/popular_response.dart';
 import 'package:peliculas/modals/search_response.dart';
@@ -18,6 +20,16 @@ class MoviesProvider extends ChangeNotifier {
   List<Movie> popularMovies = [];
   int _popularPage = 0;
 
+  final debouncer = Debouncer(
+    duration: Duration(milliseconds: 500),
+    
+    );
+  //debouncer o stream
+  final StreamController <List<Movie>> _suggestionStreamController = new StreamController.broadcast();
+  Stream<List<Movie>> get suggestionStream => this._suggestionStreamController.stream;
+
+
+
 //recibe un entero:hace referencia al id de la pelicula, recibe lista:listado de actores
   Map<int, List<Cast>> moviesCast = {};
 
@@ -26,6 +38,8 @@ class MoviesProvider extends ChangeNotifier {
     print('MoviesProvider inicializando');
     this.getOnDisplayMovies();
     this.getPopularMovies();
+
+    
   }
 
 //optimizacion de codigo                       //cuando pone [] dice que es opcional

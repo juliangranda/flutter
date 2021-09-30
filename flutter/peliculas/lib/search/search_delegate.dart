@@ -55,11 +55,14 @@ class MovieSearchDelegate extends SearchDelegate{
     if(query.isEmpty){
       return _emptyContainer();
     }
+
+    print('peticionhttp');
     
     final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
 
-    return FutureBuilder(
-      future: moviesProvider.searchMovie(query),
+
+    return StreamBuilder(
+      stream: moviesProvider.suggestionStream,
       builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot){
 
           if( !snapshot.hasData ) return _emptyContainer();
@@ -75,6 +78,10 @@ class MovieSearchDelegate extends SearchDelegate{
 
   }
 
+  void getSuggestionByQuery(String searchTerm){
+    
+
+  }
 
 }
 
