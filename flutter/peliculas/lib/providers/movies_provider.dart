@@ -20,7 +20,7 @@ class MoviesProvider extends ChangeNotifier {
   MoviesProvider() {
     print('MoviesProvider inicializando');
     this.getOnDisplayMovies();
-    this.getPopularMovies();
+    //this.getPopularMovies();
   }
 
   getOnDisplayMovies() async {
@@ -45,7 +45,7 @@ class MoviesProvider extends ChangeNotifier {
 //ver si esta recibiendo la informacion
     //print(response.body);
   }
-
+/*
   getPopularMovies() async{
         var url = Uri.https( _baseUrl, '3/movie/popular', {
       'api_key': _apiKey,
@@ -56,6 +56,6 @@ class MoviesProvider extends ChangeNotifier {
     final popularResponse = PopularResponse.fromJson(response.body);
     popularMovies = [...popularMovies , ...popularResponse.results];
     notifyListeners();
-  }
+  }*/
   
 }

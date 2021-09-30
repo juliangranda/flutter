@@ -23,6 +23,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             //cardSwiper
+            
             CardSwiper( movies: moviesProvider.onDisplayMovies),
             
             //listado horizontal de peliculas

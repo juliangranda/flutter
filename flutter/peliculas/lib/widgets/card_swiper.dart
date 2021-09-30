@@ -29,6 +29,7 @@ class CardSwiper extends StatelessWidget {
       //toma la mitad de la pantalla
       height: size.height * 0.5,
       child: Swiper(
+        
         itemCount: movies.length,
         layout: SwiperLayout.STACK,
         itemWidth: size.width * 0.6,
@@ -36,6 +37,7 @@ class CardSwiper extends StatelessWidget {
         itemBuilder: ( BuildContext context, int index){
 
           final movie = movies[index];
+          //print(movie.posterPath);
           //print(movie.fullPosterImg);
 
           return GestureDetector(
@@ -44,7 +46,7 @@ class CardSwiper extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'), 
-                image: NetworkImage('${movie.fullPosterImg}'),
+                image: NetworkImage(movie.fullPosterImg),//////
                 //adaptar la imagen para el tamaño del contenedor
                 fit: BoxFit.cover,
               ),

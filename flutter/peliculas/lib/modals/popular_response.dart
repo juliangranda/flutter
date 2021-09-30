@@ -1,7 +1,7 @@
 // To parse this JSON data, do
 //
 //     final popularResponse = popularResponseFromMap(jsonString);
-
+/*
 import 'dart:convert';
 
 import 'package:peliculas/modals/modals.dart';
@@ -32,4 +32,4 @@ class PopularResponse {
 
 
 }
-
+*/
