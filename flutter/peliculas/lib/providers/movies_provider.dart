@@ -17,6 +17,9 @@ class MoviesProvider extends ChangeNotifier {
   List<Movie> popularMovies = [];
   int _popularPage = 0;
 
+//recibe un entero:hace referencia al id de la pelicula, recibe lista:listado de actores
+  Map<int, List<Cast>> moviesCast = {}; 
+
 //para poner a funcionar toda la informacion que estamos recibiendo
   MoviesProvider() {
     print('MoviesProvider inicializando');
@@ -61,6 +64,23 @@ class MoviesProvider extends ChangeNotifier {
     popularMovies = [...popularMovies , ...popularResponse.results];
    
     notifyListeners();
+  }
+
+  Future<List<Cast>>getMovieCast(int movieId)async {
+    //revisar el mapa 
+
+    print('pidiendo info al servidor - Cast');
+
+    final jsonData = await this._getJsonData('3/movie/$movieId/credits');
+    final creditsResponse = CreditsResponse.fromJson(jsonData);
+
+    moviesCast[movieId] = creditsResponse.cast;
+
+    return creditsResponse.cast;
+
+  
+
+
   }
   
 }
