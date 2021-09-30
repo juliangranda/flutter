@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/modals/modals.dart';
 
 class MovieSlider extends StatelessWidget {
   //const name({Key? key}) : super(key: key);
+
+  final List<Movie> movies;
+  final String? title;
+
+  const MovieSlider({Key? key, required this.movies, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,19 +18,20 @@ class MovieSlider extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          //si no hay titulo no debe de mostrar este widget
+          if(this.title != null)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(this.title!, style: TextStyle(fontSize:20, fontWeight: FontWeight.bold)),
 
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text('populares', style: TextStyle(fontSize:20, fontWeight: FontWeight.bold)),
-
-            ),
+              ),
             SizedBox(height:5),
           //se usa un widget llamado expanded para que tenga la listView.builder para que esa list view sepa que tañado debe de tomar al ser el tamaño de la columna flexible por el padding,etc
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 20,
-              itemBuilder: (_ , int index ) => _MoviePoster()          
+              itemCount: movies.length,
+              itemBuilder: (_ , int index ) => _MoviePoster(movie: movies[index],)          
 
               ),
           ),
@@ -37,6 +44,9 @@ class MovieSlider extends StatelessWidget {
 //widget privado para mantener el orden y legibilidad en el codigo, ademas de solo ser utilizado en este archivo
 class _MoviePoster extends StatelessWidget {
   //const _MoviePoster({Key? key}) : super(key: key);
+
+  final Movie movie;
+  const _MoviePoster({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +64,7 @@ class _MoviePoster extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           child: FadeInImage(
                             placeholder: AssetImage('assets/no-image.jpg'),
-                             image: NetworkImage('https://via.placeholder.com/300x400'),
+                             image: NetworkImage(movie.fullPosterImg),
                              width: 130,
                              height: 190,
                              fit: BoxFit.cover,
@@ -64,7 +74,7 @@ class _MoviePoster extends StatelessWidget {
 
                         SizedBox(height: 5),
                          Text(
-                           'star wars: el retorno del el nuevo jedi silvestre de Monte cristo',
+                           movie.title,
                            maxLines: 2,
                            overflow: TextOverflow.ellipsis,
                            textAlign: TextAlign.center,
