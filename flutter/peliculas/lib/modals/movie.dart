@@ -47,6 +47,7 @@ class Movie {
     return 'https://i.stack.imgur.com/GNhxO.png';
   }
 
+
   factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
 
   factory Movie.fromMap(Map<String, dynamic> json) => Movie(
