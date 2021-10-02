@@ -1,0 +1,38 @@
+guia de comandos
+
+desde vs
+-estar ubicado en la raiz del proyecto
+-conectarse al dispositivo del celular por medio de: command pallete y escoge dispositivo
+
+1)flutter doctor -v
+2)buscar en resultado consola: Java binary at: E:\programas\android_studio\jre\bin\java
+3) poner en terminal: cd E:\programas\android_studio\jre\bin\
+4)generamos la key para el apk con siguientes pasos pero esta queda guardada en c:\Users\JULIAN DAVID GOMEZ\key.jks
+5)añadimos lo siguiente: .\keytool -genkey -v -keystore "c:\Users\JULIAN DAVID GOMEZ\key.jks" -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias key
+6)notas:se usa ./ para evitar un error de url
+7)notas:la url de nuestro usuario principal va entre comillas pq tenemos espacios en blanco en nuestro usuario(JULIAN DAVID GOMEZ), si no tuviera espacios no estarian las comillas
+8)cerramos terminal y vamos de nuevo a la carpeta raiz del proyecto
+9)recordar cable usb con celular y conectado entre pc y celular como command pallette seleccionado dispositivo
+10)generamos nuestro paquete apk:flutter build apk --release
+11)flutter install
+
+notas:
+
+1)build.gradle,mainActivity.kt,AndroidManifiest.xml ,si queremos cambiarle el nombre en esta parte iria 
+applicationId "com.example.peliculasjuliangranda",package com.example.peliculasjuliangranda,<manifest xmlns:android="http://schemas.android.com/apk/res/android",
+todos 3 archivos deben de llevar el mismo nombre
+
+2)crear archivo llamado key.properties en la carpeta android/app/<aqui el archivo>
+3)storePassword=baloncesto  //contraseña del keytool
+keyPassword=baloncesto     //contraseña del keytool
+keyAlias=key                //key por defecto
+storeFile= c://Users//JULIAN DAVID GOMEZ//key.jks   //ruta del key generado luego del keytool
+
+
+//importantisimo: probablemente falten pasos pero estan la mayoria de lineas de comandos que nos salvaron la vida y pasos a seguir igualmente
+//recordar ver el video para seguir la lista de pasos hasta el minuto 13 despues de ese punto mirar documento oficial en flutter
+
+//nota importantisima: faltan algunos pasos pq no me los se de memoria , mirar video o documentacion oficial 
+
+"c:\Users\JULIAN DAVID GOMEZ\key.jks"
+ baloncesto
