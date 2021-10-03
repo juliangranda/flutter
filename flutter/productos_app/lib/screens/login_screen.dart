@@ -7,11 +7,17 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AuthBackground( 
-        child: Container(
-          width: double.infinity,
-          height: 200,
-          color: Colors.red,
-        ),
+        //singlechildscrollview me va a permitir hacer scroll si los hijos o child sobrepasan la capacidad del dispositivo
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 150),
+              CardContainer(
+                child: Text('hola mundo'),
+              ),
+            ],
+          ),
+        )
       ),
     );
   }
