@@ -12,7 +12,9 @@ class HomeScreen extends StatelessWidget {
       //listview builder ,es mejor pq es mas perezoso ,es decir, solo va a crear los widgets cuando se necesiten en la pantalla y no los va a dejar activos solo cuando es necesario 
       body: ListView.builder(
         itemCount: 10,
-        itemBuilder: (BuildContext context, int index) => ProductCard()
+        itemBuilder: (BuildContext context, int index) => GestureDetector(
+          onTap: () => Navigator.pushNamed(context, 'product'),
+          child: ProductCard())
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
