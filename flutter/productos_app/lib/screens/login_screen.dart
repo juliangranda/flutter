@@ -13,7 +13,15 @@ class LoginScreen extends StatelessWidget {
             children: [
               SizedBox(height: 150),
               CardContainer(
-                child: Text('hola mundo'),
+                child: Column(
+                  children: [
+                    SizedBox(height:10),
+                    Text('login', style: Theme.of(context).textTheme.headline4,),
+                    SizedBox(height:30),
+
+                    Text('formulario')
+                  ],
+                ),
               ),
             ],
           ),
