@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
-
+//nota: para una box decoration se extrae el metodo
+//para un widget y hacer el codigo mas limpio se usa un extract widget
 class AuthBackground extends StatelessWidget {
   
+  //esta parte desde widget child hasta override , lo que esta haciendo es un widget con argumentos para poner un widget en el background que va en el centro
+  final Widget child;
+  const AuthBackground({
+    Key? key,
+     required this.child
+    }) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +22,34 @@ class AuthBackground extends StatelessWidget {
       child: Stack(
         children: [
           _PurpleBox(),
+          
+          //safeArea se usa para evitar una zona negra que tienen los celulares
+          //se uso click+. y extract widget para poner mas limpio el codigo
+          _HeaderIcon(),
+
+          //llamamos widget con argumento
+          this.child,
 
         ],
+      ),
+    );
+  }
+}
+
+class _HeaderIcon extends StatelessWidget {
+  const _HeaderIcon({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        width: double.infinity,
+        margin: EdgeInsets.only(top:30),
+        /* height: 200,
+        color: Colors.red, */
+        child: Icon(Icons.person_pin, color:Colors.white, size: 100,),
       ),
     );
   }
@@ -31,6 +66,7 @@ class _PurpleBox extends StatelessWidget {
       width: double.infinity,
       height: size.height * 0.4,
       //box decoration puede crecer con algunas caracteristicas adicionales
+      //_purplebackground es un extract decoration pq se esta usando en una boxDecoration
       decoration: _purpleBackground(),
       child: Stack(
         children: [
