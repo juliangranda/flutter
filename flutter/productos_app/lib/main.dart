@@ -14,6 +14,10 @@ class MyApp extends StatelessWidget {
         'login': (_) => LoginScreen(),
         'home': (_) => HomeScreen(),
       },
+      //cambio del color de todos los scafold de la aplicacion
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.grey[300]
+      )
     );
   }
 }
