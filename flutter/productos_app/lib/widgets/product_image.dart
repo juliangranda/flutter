@@ -11,7 +11,7 @@ class ProductImage extends StatelessWidget {
       child: Container(
         decoration: _BuildBoxDecoration(),
         width: double.infinity,
-        height: 350,
+        height: 300,
         child: ClipRRect(
           borderRadius: BorderRadius.only(topLeft: Radius.circular(45), topRight: Radius.circular(45)),
           child: FadeInImage(
