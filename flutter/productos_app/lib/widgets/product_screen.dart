@@ -65,7 +65,7 @@ class _ProductScreenBody extends StatelessWidget {
                             return;
                           }
                           //path: archivo fisico en el dispositivo de la imagen tomada por la camara
-                          print('tenemos imagen ${pickedFile.path}');
+                          //print('tenemos imagen ${pickedFile.path}');
 
                           productService.updateSelectedProductImage(pickedFile.path);
                         },
@@ -85,10 +85,20 @@ class _ProductScreenBody extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.save_outlined),
-          onPressed: () async {
+          child: productService.isSaving 
+          ?CircularProgressIndicator(color: Colors.white)
+          : Icon(Icons.save_outlined),
+          onPressed: productService.isSaving
+          ? null
+          : () async {
             //guardar producto
             if (!productForm.isValidForm()) return;
+
+            //cargar imagen del producto
+            final String? imageUrl = await productService.uploadImage();
+            //url en cloudinary
+            print(imageUrl);
+            if(imageUrl != null) productForm.product.picture = imageUrl;
 
             await productService.saveOrCreateProduct(productForm.product);
           }),

@@ -1,6 +1,7 @@
 //servicio es el que se va a encargar de hacer las peticiones http
 
 import 'dart:convert';
+
 import 'dart:io';
 //import 'dart:html';
 
@@ -14,7 +15,7 @@ class ProductsService extends ChangeNotifier {
   late Product selectedProduct;
 
   //almacenas la imagen
-  File? newPictureFile; 
+  File? newPictureFile;
 
   //late Product? selectedProduct;
   //propiedad para saber cuando estoy cargando y cuando no
@@ -55,7 +56,7 @@ class ProductsService extends ChangeNotifier {
 
     if (product.id == null) {
       //es necesario crear
-      await this.createProduct( product);
+      await this.createProduct(product);
     } else {
       //actualizar
       await this.updateProduct(product);
@@ -72,13 +73,14 @@ class ProductsService extends ChangeNotifier {
     //print(decodedData);
 
     //actualizar el listado de productos
-    final index = this.products.indexWhere((element) => element.id == product.id);
+    final index =
+        this.products.indexWhere((element) => element.id == product.id);
     this.products[index] = product;
 
     return product.id!;
   }
 
-    Future<String> createProduct(Product product) async {
+  Future<String> createProduct(Product product) async {
     final url = Uri.https(_baseUrl, 'products.json');
     final resp = await http.post(url, body: product.toJson());
     final decodedData = json.decode(resp.body);
@@ -87,17 +89,44 @@ class ProductsService extends ChangeNotifier {
     print(decodedData);
     this.products.add(product);
 
-
-
     return product.id!;
-    
   }
 
-  void updateSelectedProductImage(String path){
+  void updateSelectedProductImage(String path) {
     //Crear imagen en la vista previa
     this.selectedProduct.picture = path;
     this.newPictureFile = File.fromUri(Uri(path: path));
 
     notifyListeners();
+  }
+
+  Future<String?> uploadImage() async {
+    if (this.newPictureFile == null) return null;
+
+    this.isSaving = true;
+    notifyListeners();
+
+    final url = Uri.parse(
+        'https://api.cloudinary.com/v1_1/juliangranda/image/upload?upload_preset=k8iqpnhn');
+
+    final imageUploadRequest = http.MultipartRequest('POST', url);
+
+    final file =
+        await http.MultipartFile.fromPath('file', newPictureFile!.path);
+
+    imageUploadRequest.files.add(file);
+
+    final streamResponse = await imageUploadRequest.send();
+    final resp = await http.Response.fromStream(streamResponse);
+    print(resp.body);
+    if (resp.statusCode != 200 && resp.statusCode != 201) {
+      print('algo salio mal');
+      print(resp.body);
+      return null;
+    }
+    this.newPictureFile = null;
+
+    final decodedData = json.decode(resp.body);
+    return decodedData['secure_url'];
   }
 }
