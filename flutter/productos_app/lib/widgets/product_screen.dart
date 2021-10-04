@@ -5,6 +5,7 @@ import 'package:productos_app/services/services.dart';
 import 'package:productos_app/ui/input_decorations.dart';
 import 'package:productos_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProductScreen extends StatelessWidget {
   @override
@@ -52,8 +53,18 @@ class _ProductScreenBody extends StatelessWidget {
                     top: 60,
                     right: 20,
                     child: IconButton(
-                        onPressed: () {
+                        onPressed: () async {
                           //camera o galeria
+
+                          final picker = new ImagePicker();
+                          final XFile? pickedFile = await picker.pickImage(
+                              source: ImageSource.camera, imageQuality: 100);
+
+                          if(pickedFile == null){
+                            print('no selecciono nada');
+                            return;
+                          }
+                          print('tenemos imagen ${pickedFile.path}');
                         },
                         icon: Icon(
                           Icons.camera_alt_outlined,
@@ -72,9 +83,9 @@ class _ProductScreenBody extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.save_outlined),
-          onPressed: () async{
+          onPressed: () async {
             //guardar producto
-            if(!productForm.isValidForm()) return;
+            if (!productForm.isValidForm()) return;
 
             await productService.saveOrCreateProduct(productForm.product);
           }),
@@ -120,12 +131,13 @@ class _ProductForm extends StatelessWidget {
                 initialValue: '${product.price}',
                 //solo validacion para numeros con valores decimales
                 inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
+                  FilteringTextInputFormatter.allow(
+                      RegExp(r'^(\d+)?\.?\d{0,2}'))
                 ],
                 onChanged: (value) {
-                  if(double.tryParse(value) == null){
+                  if (double.tryParse(value) == null) {
                     product.price = 0;
-                  }else{
+                  } else {
                     product.price = double.parse(value);
                   }
                 },
@@ -144,8 +156,7 @@ class _ProductForm extends StatelessWidget {
                   value: product.available,
                   title: Text('Disponible'),
                   activeColor: Colors.indigo,
-                  onChanged: productForm.updateAvailability
-                  ),
+                  onChanged: productForm.updateAvailability),
               SizedBox(
                 height: 30,
               )
