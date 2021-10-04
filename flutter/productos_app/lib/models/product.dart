@@ -16,6 +16,7 @@ class Product {
     String name;
     String? picture; //a veces aparece la imagen y otras veces no
     double price;
+    String? id;
 
     factory Product.fromJson(String str) => Product.fromMap(json.decode(str));
 
