@@ -22,9 +22,12 @@ class ProductCard extends StatelessWidget {
               title: product.name,
               subtitle: product.id!,
             ),
-            Positioned(top: 0, right: 0, child: _PriceTag(
-              price: product.price,
-            )),
+            Positioned(
+                top: 0,
+                right: 0,
+                child: _PriceTag(
+                  price: product.price,
+                )),
             //mostrar de manera condicional
             if (!product.available)
               Positioned(top: 0, left: 0, child: _NotAvailable())
@@ -73,7 +76,7 @@ class _NotAvailable extends StatelessWidget {
 class _PriceTag extends StatelessWidget {
   final double price;
 
-  const _PriceTag({ required this.price}) ;
+  const _PriceTag({required this.price});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -104,7 +107,7 @@ class _ProductDetails extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  const _ProductDetails({required this.title, required this.subtitle });
+  const _ProductDetails({required this.title, required this.subtitle});
   @override
   Widget build(BuildContext context) {
     //widget padding dentro del container permite por asi decirlo recortar el tamaño del contenedor
@@ -159,12 +162,16 @@ class _BackgroundImage extends StatelessWidget {
         width: double.infinity,
         height: 400,
         //color: Colors.red
-        child: FadeInImage(
-          //fix productos cuando no hay imagen
-          placeholder: AssetImage('assets/jar-loading.gif'),
-          image: NetworkImage(url!),
-          fit: BoxFit.cover,
-        ),
+        child: url == null
+            ? Image(
+              image: AssetImage('assets/no-image.png'),
+              fit: BoxFit.cover,)
+            : FadeInImage(
+                //fix productos cuando no hay imagen
+                placeholder: AssetImage('assets/jar-loading.gif'),
+                image: NetworkImage(url!),
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }
