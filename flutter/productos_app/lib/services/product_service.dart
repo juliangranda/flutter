@@ -1,6 +1,8 @@
 //servicio es el que se va a encargar de hacer las peticiones http
 
 import 'dart:convert';
+import 'dart:io';
+//import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:productos_app/models/models.dart';
@@ -10,6 +12,10 @@ class ProductsService extends ChangeNotifier {
   final String _baseUrl = 'flutter-varios-3b505-default-rtdb.firebaseio.com';
   final List<Product> products = [];
   late Product selectedProduct;
+
+  //almacenas la imagen
+  File? newPictureFile; 
+
   //late Product? selectedProduct;
   //propiedad para saber cuando estoy cargando y cuando no
   bool isloading = true;
@@ -85,5 +91,13 @@ class ProductsService extends ChangeNotifier {
 
     return product.id!;
     
+  }
+
+  void updateSelectedProductImage(String path){
+    //Crear imagen en la vista previa
+    this.selectedProduct.picture = path;
+    this.newPictureFile = File.fromUri(Uri(path: path));
+
+    notifyListeners();
   }
 }

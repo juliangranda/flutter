@@ -55,7 +55,7 @@ class _ProductScreenBody extends StatelessWidget {
                     child: IconButton(
                         onPressed: () async {
                           //camera o galeria
-
+                          //codigo para el uso de la camara en android en la nueva actualizacion
                           final picker = new ImagePicker();
                           final XFile? pickedFile = await picker.pickImage(
                               source: ImageSource.camera, imageQuality: 100);
@@ -64,7 +64,10 @@ class _ProductScreenBody extends StatelessWidget {
                             print('no selecciono nada');
                             return;
                           }
+                          //path: archivo fisico en el dispositivo de la imagen tomada por la camara
                           print('tenemos imagen ${pickedFile.path}');
+
+                          productService.updateSelectedProductImage(pickedFile.path);
                         },
                         icon: Icon(
                           Icons.camera_alt_outlined,
