@@ -13,6 +13,7 @@ class ProductsService extends ChangeNotifier {
   //late Product? selectedProduct;
   //propiedad para saber cuando estoy cargando y cuando no
   bool isloading = true;
+  bool isSaving = false;
 
   ProductsService() {
     this.loadProducts();
@@ -20,7 +21,6 @@ class ProductsService extends ChangeNotifier {
 
 //
   Future<List<Product>> loadProducts() async {
-
     this.isloading = true;
     notifyListeners();
 
@@ -41,5 +41,31 @@ class ProductsService extends ChangeNotifier {
     this.isloading = false;
     notifyListeners();
     return this.products;
-;  }
+  }
+
+  Future saveOrCreateProduct(Product product) async {
+    isSaving = true;
+    notifyListeners();
+
+    if (product.id == null) {
+      //es necesario crear
+    } else {
+      //actualizar
+      await this.updateProduct(product);
+    }
+    isSaving = false;
+    notifyListeners();
+  }
+
+  Future<String> updateProduct(Product product) async {
+    final url = Uri.https(_baseUrl, 'products/${product.id}.json');
+    final resp = await http.put(url, body: product.toJson());
+    final decodedData = resp.body;
+
+    print(decodedData);
+
+    //actualizar el listado de productos
+    
+    return product.id!;
+  }
 }
