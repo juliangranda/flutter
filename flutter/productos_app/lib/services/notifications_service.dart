@@ -8,5 +8,6 @@ class NotificationsService{
     final snackBar = new SnackBar(content: Text(message, style: TextStyle(color: Colors.white, fontSize: 20),));
 
     messengerkey.currentState!.showSnackBar(snackBar);
+    
   }
 }
