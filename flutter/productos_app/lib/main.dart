@@ -40,6 +40,8 @@ class MyApp extends StatelessWidget {
 
         'checking': (_) => CheckAuthScreen(),
       },
+
+      scaffoldMessengerKey: NotificationsService.messengerkey,
       //cambio del color de todos los scafold de la aplicacion
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[300],
