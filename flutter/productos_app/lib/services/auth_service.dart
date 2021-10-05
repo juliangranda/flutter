@@ -70,4 +70,11 @@ class AuthService extends ChangeNotifier{
     await storage.delete(key: 'token');
     return;
   }
+
+  Future<String> readToken()async{
+
+    //evaluar si existe el token
+    return await storage.read(key: 'token') ?? '';
+
+  }
 }

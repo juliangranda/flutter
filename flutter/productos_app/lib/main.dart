@@ -29,13 +29,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'productos app',
-      initialRoute: 'login',
+      initialRoute: 'checking',
       //initialRoute: 'home',
       routes: {
         'login': (_) => LoginScreen(),
         'register': (_) => RegisterScreen(),
+
         'home': (_) => HomeScreen(),
         'product': (_) => ProductScreen(),
+
+        'checking': (_) => CheckAuthScreen(),
       },
       //cambio del color de todos los scafold de la aplicacion
       theme: ThemeData.light().copyWith(
