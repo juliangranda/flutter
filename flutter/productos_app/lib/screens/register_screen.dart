@@ -5,7 +5,7 @@ import 'package:productos_app/ui/input_decorations.dart';
 import 'package:productos_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: 10),
                   Text(
-                    'login',
+                    'crear cuenta',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   SizedBox(height: 30),
@@ -29,25 +29,22 @@ class LoginScreen extends StatelessWidget {
                   ChangeNotifierProvider(
                     create: (_) => LoginFormProvider(),
                     child: _LoginForm(),
-                    )
-                  
+                  )
                 ],
               ),
             ),
             SizedBox(height: 50),
             TextButton(
-              onPressed: () => Navigator.pushReplacementNamed(context, 'register'),
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, 'login'),
               style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.indigo.withOpacity(0.1)),
-                shape: MaterialStateProperty.all(StadiumBorder())
-              ),
-              child: Text(
-               'crear una nueva cuenta',
-                style: TextStyle(fontSize: 18, color: Colors.black87)),
-               ),
-
-                SizedBox(height: 50)
-        
+                  overlayColor:
+                      MaterialStateProperty.all(Colors.indigo.withOpacity(0.1)),
+                  shape: MaterialStateProperty.all(StadiumBorder())),
+              child: Text('ya tienes una cuenta?',
+                  style: TextStyle(fontSize: 18, color: Colors.black87)),
+            ),
+            SizedBox(height: 50)
           ],
         ),
       )),
@@ -56,7 +53,6 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _LoginForm extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
@@ -75,8 +71,7 @@ class _LoginForm extends StatelessWidget {
               decoration: InputDecorations.authInputDecoration(
                   hintText: 'john.doe@gmail.com',
                   labelText: 'Correo electronico',
-                  prefixIcon: Icons.alternate_email_sharp
-                  ),
+                  prefixIcon: Icons.alternate_email_sharp),
               //establecer los valores del provider
               onChanged: (value) => loginForm.email = value,
               validator: (value) {
@@ -100,17 +95,12 @@ class _LoginForm extends StatelessWidget {
               decoration: InputDecorations.authInputDecoration(
                   hintText: '**************',
                   labelText: 'Contraseña',
-                  prefixIcon: Icons.lock_clock_outlined
-                  ),
+                  prefixIcon: Icons.lock_clock_outlined),
               onChanged: (value) => loginForm.password = value,
               validator: (value) {
-                
-                    
-                return (value != null && value.length >= 6 )
-                ? null
-                : 'la constraseña debe de 6 caracteres';
-                
-
+                return (value != null && value.length >= 6)
+                    ? null
+                    : 'la constraseña debe de 6 caracteres';
               },
             ),
             SizedBox(height: 30),
@@ -122,27 +112,25 @@ class _LoginForm extends StatelessWidget {
               color: Colors.deepPurple,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                child: Text(
-                  loginForm.isLoading
-                  ? 'espere'
-                  :'ingresar',
-                   style: TextStyle(color: Colors.white)),
+                child: Text(loginForm.isLoading ? 'espere' : 'ingresar',
+                    style: TextStyle(color: Colors.white)),
               ),
-              onPressed: loginForm.isLoading ? null :  () async{
-                
-                //quitar o esconder el teclado
-                FocusScope.of(context).unfocus();
-                //login form
-                if( !loginForm.isValidForm() )return;
+              onPressed: loginForm.isLoading
+                  ? null
+                  : () async {
+                      //quitar o esconder el teclado
+                      FocusScope.of(context).unfocus();
+                      //login form
+                      if (!loginForm.isValidForm()) return;
 
-                loginForm.isLoading = true;
-                //espera y luego ejecuta lo que sigue
-                await Future.delayed(Duration(seconds: 2));
-                //validar si el login es correcto
-                loginForm.isLoading = false;
+                      loginForm.isLoading = true;
+                      //espera y luego ejecuta lo que sigue
+                      await Future.delayed(Duration(seconds: 2));
+                      //validar si el login es correcto
+                      loginForm.isLoading = false;
 
-                Navigator.pushReplacementNamed(context, 'home');
-              },
+                      Navigator.pushReplacementNamed(context, 'home');
+                    },
             )
           ],
         ),
