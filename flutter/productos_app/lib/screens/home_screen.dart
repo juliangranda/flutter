@@ -11,12 +11,22 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final productsService = Provider.of<ProductsService>(context);
+//listen:false evita escuchar los cambios de estado y evita que se redibuje el widget
+    final authService = Provider.of<AuthService>(context, listen: false);
 
     if(productsService.isloading) return LoadingScreen();
     return Scaffold(
       appBar: AppBar(
         title: Text('productos'),
+        //actions para ponerlo en la otra esquina de al lado
+        leading: IconButton(
+          onPressed: (){
+            authService.logout();
+            Navigator.pushReplacementNamed(context, 'login');
+        }, 
+        icon: Icon(Icons.login_outlined)),
       ),
+
       //listview builder ,es mejor pq es mas perezoso ,es decir, solo va a crear los widgets cuando se necesiten en la pantalla y no los va a dejar activos solo cuando es necesario 
       body: ListView.builder(
         itemCount: productsService.products.length,
