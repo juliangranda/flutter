@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:productos_app/providers/login_form_provider.dart';
+import 'package:productos_app/services/auth_service.dart';
 import 'package:productos_app/ui/input_decorations.dart';
 import 'package:productos_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
@@ -120,16 +121,22 @@ class _LoginForm extends StatelessWidget {
                   : () async {
                       //quitar o esconder el teclado
                       FocusScope.of(context).unfocus();
+                      final authService = Provider.of<AuthService>(context, listen: false);
                       //login form
                       if (!loginForm.isValidForm()) return;
 
                       loginForm.isLoading = true;
-                      //espera y luego ejecuta lo que sigue
-                      await Future.delayed(Duration(seconds: 2));
+
                       //validar si el login es correcto
+                      final String? errorMessage = await authService.createUser(loginForm.email, loginForm.password);
+                      if(errorMessage == null){
+                        Navigator.pushReplacementNamed(context, 'home');
+                      }else{
+                        print(errorMessage);
+                      }
                       loginForm.isLoading = false;
 
-                      Navigator.pushReplacementNamed(context, 'home');
+                      
                     },
             )
           ],

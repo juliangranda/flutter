@@ -8,7 +8,7 @@ class AuthService extends ChangeNotifier{
   //token de acceso de API de firebase
   final String _firebaseToken = 'AIzaSyCd-lO5lWhjLA2g8UAGm13xCyIo5p8e6pM';
 
-
+  //retornamos algo , es un error sino todo bien
   Future<String?> createUser(String email, String password)async{
 
     final Map<String, dynamic> authData = {
@@ -24,5 +24,12 @@ class AuthService extends ChangeNotifier{
     final resp = await http.post(url, body: json.encode(authData));
     final Map<String, dynamic> decodedResp = json.decode(resp.body);
     print(decodedResp);
+    if(decodedResp.containsKey('idToken')){
+      //token hay que guardarlo en un lugar seguro
+      //return decodedResp['idToken'];
+      return null;
+    }else{
+      return decodedResp['error']['message'];
+    }
   }
 }
