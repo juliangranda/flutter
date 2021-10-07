@@ -15,6 +15,12 @@ class MyApp extends StatelessWidget {
         'home': ( _ ) => HomePage(),
         'map': ( _ ) => MapaPage(),
       },
+      theme: ThemeData(
+        primaryColor: Colors.deepPurple,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.deepPurple
+        )
+      ),
     );
   }
 }
