@@ -48,8 +48,11 @@ class _HomePageBody extends StatelessWidget {
     //DBProvider.db.nuevoScan( tempScan);
 
     //probamos funciones de la db
-    DBProvider.db.getScanById(1).then((scan)=>print(scan!.valor)); //valor es required por lo que sabemos que recibimos
-    DBProvider.db.getTodosLosScans().then(print);
+    //DBProvider.db.getScanById(1).then((scan)=>print(scan!.valor)); //valor es required por lo que sabemos que recibimos
+    //DBProvider.db.getTodosLosScans().then(print);
+
+
+    
     switch(currentIndex){
       case 0:
         return MapasPage();
