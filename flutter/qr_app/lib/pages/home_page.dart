@@ -45,8 +45,11 @@ class _HomePageBody extends StatelessWidget {
 
     //solo para ver la db temporal
     final tempScan = new ScanModel(valor: 'http://google.com');
-    DBProvider.db.nuevoScan( tempScan);
-    
+    //DBProvider.db.nuevoScan( tempScan);
+
+    //probamos funciones de la db
+    DBProvider.db.getScanById(1).then((scan)=>print(scan!.valor)); //valor es required por lo que sabemos que recibimos
+    DBProvider.db.getTodosLosScans().then(print);
     switch(currentIndex){
       case 0:
         return MapasPage();
