@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qr_app/pages/direcciones_page.dart';
 import 'package:qr_app/pages/mapas_page.dart';
 import 'package:qr_app/providers/db_provider.dart';
+import 'package:qr_app/providers/scan_list_provider.dart';
 import 'package:qr_app/providers/ui_provider.dart';
 import 'package:qr_app/widgets/custom_navigatorBar.dart';
 import 'package:qr_app/widgets/scan_button.dart';
@@ -44,19 +45,23 @@ class _HomePageBody extends StatelessWidget {
     final currentIndex = uiProvider.selectedMenuOpt;
 
     //solo para ver la db temporal
-    final tempScan = new ScanModel(valor: 'http://google.com');
+    //final tempScan = new ScanModel(valor: 'http://google.com');
     //DBProvider.db.nuevoScan( tempScan);
 
     //probamos funciones de la db
     //DBProvider.db.getScanById(1).then((scan)=>print(scan!.valor)); //valor es required por lo que sabemos que recibimos
     //DBProvider.db.getTodosLosScans().then(print);
 
+    //usar el scanListProvider, listen = false pq no me interesa que se redibuje nuestra variable , sino que se redibujen los que estan en el switch
+    final scanListProvider = Provider.of<ScanListProvider>(context, listen: false);
 
     
     switch(currentIndex){
       case 0:
+      scanListProvider.cargarScansPorTipo('geo');
         return MapasPage();
       case 1:
+      scanListProvider.cargarScansPorTipo('http');
         return DireccionesPage();
       default:
       return MapasPage();

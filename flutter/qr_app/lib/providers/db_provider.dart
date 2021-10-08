@@ -91,7 +91,7 @@ class DBProvider{
     Future<List<ScanModel>>getTodosLosScans()async{
     final db = await database;
     final res = await db.query('Scans');
-
+    print(res);
     return res.isNotEmpty
           ? res.map((scan) => ScanModel.fromJson(scan)).toList()
           : [];
