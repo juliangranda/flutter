@@ -12,9 +12,11 @@ class ScanListProvider extends ChangeNotifier{
 
     final nuevoScan = new ScanModel(valor: valor);
     final id = await DBProvider.db.nuevoScan(nuevoScan);
+    
 
     //asignar el id en la base de datos al modelo
     nuevoScan.id = id;
+    
     if(this.tipoSeleccionado == nuevoScan.tipo){
       this.scans.add(nuevoScan);
       notifyListeners();
@@ -42,7 +44,7 @@ class ScanListProvider extends ChangeNotifier{
 
     borrarScanPorId(int id)async{
       final scans = await DBProvider.db.deleteScan(id);
-      this.cargarScansPorTipo(this.tipoSeleccionado);
+      //this.cargarScansPorTipo(this.tipoSeleccionado);
       
     }
 }
