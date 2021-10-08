@@ -19,7 +19,7 @@ class ScanButton extends StatelessWidget {
         scanListProvider.nuevoScan(barcodeScanRes);
 
         //inserta valor tipo 'geo' a la bd
-        //scanListProvider.nuevoScan('geo:15.33,15.66');
+        scanListProvider.nuevoScan('geo:15.33,15.66');
         //muestro la base de datos
         //scanListProvider.cargarScans();
       },
