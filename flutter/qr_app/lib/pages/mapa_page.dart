@@ -35,6 +35,23 @@ class _MapaPageState extends State<MapaPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Mapa'),
+        actions: [
+          IconButton(onPressed: ()async{
+
+                final GoogleMapController controller = await _controller.future;
+                controller.animateCamera(
+                  CameraUpdate.newCameraPosition(
+                    CameraPosition(
+                      target: scan.getLatLng(),
+                      zoom: 17,
+                      tilt:50
+                      
+                    )
+                  )
+                  );
+          }, 
+          icon: Icon(Icons.location_city_sharp))
+        ],
       ),
       body: GoogleMap(
         myLocationButtonEnabled: false,
