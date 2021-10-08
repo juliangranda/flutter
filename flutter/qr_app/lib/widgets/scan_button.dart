@@ -26,7 +26,8 @@ class ScanButton extends StatelessWidget {
         launchURL(context, nuevoScan);
 
         //inserta valor tipo 'geo' a la bd
-        //scanListProvider.nuevoScan('geo:15.33,15.66');
+        
+        //scanListProvider.nuevoScan('geo:6.243687, -75.584647');
         //muestro la base de datos
         //scanListProvider.cargarScans();
       },
