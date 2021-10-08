@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:preferenciasusuarioapp/src/widgets/menu_widget.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 class SettingsPage extends StatefulWidget {
 
 //nombrar el ruta de la pagina con un nombre especifico
@@ -22,9 +22,28 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    cargarPref();
     _textController = new TextEditingController(text: _nombre);
   }
+  cargarPref()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _genero = prefs.getInt('genero') ?? 1;
+    setState(() {
+      
+    });
+
+  }
+
+   _setSelectedRadio(int? valor)async{
+
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+     await prefs.setInt('genero', valor!);
+    //
+     _genero = valor;
+     setState(() {
+       
+     });
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -56,24 +75,14 @@ class _SettingsPageState extends State<SettingsPage> {
               value: 1,
               title: Text('masculino'),
                groupValue: _genero,
-                onChanged: ( value ){
-                  
-                  setState(() {
-                    _genero = value as int;
-                  });
-                }
+                onChanged: _setSelectedRadio
                 ),
 
             RadioListTile(
               value: 2,
               title: Text('femenino'),
                groupValue: _genero,
-                onChanged: ( value ){
-                  
-                  setState(() {
-                    _genero = value as int;
-                  });
-                }
+                onChanged: _setSelectedRadio
                 ),
 
             Divider(),
