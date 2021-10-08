@@ -39,6 +39,7 @@ dependencies:
   #path provider ,nos dice donde esta la ubicacion url o el path de la base de datos que esta instalada en el dispositivo
   path_provider: ^2.0.5
   sqflite: ^2.0.0+4
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:
