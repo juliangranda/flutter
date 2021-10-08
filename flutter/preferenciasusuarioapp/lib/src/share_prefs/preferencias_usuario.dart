@@ -1,3 +1,9 @@
+
+//cuando vayamos a usar un preferencias de usuario en otro proyecto basta con dos cosas
+//1:copiar el codigo de share_prefs y hacer debidos cambios
+//2. no olvidar en el main.dart la configuracion en el void main() para inicializar las prefs en el momento que nosotros las vamos a consumir o utilizar
+
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,10 +22,6 @@ class PreferenciasUsuario{
   initPrefs()async{
     this._prefs = await SharedPreferences.getInstance();
   }
-  //ninguna de estas propiedad se usa, propiedades que se van a almacenar en esta clase
-  //bool _colorSecundario;
-  //int _genero;
-  //String _nombre;
 
   //GET y SET del genero
   int get genero{
@@ -47,5 +49,16 @@ class PreferenciasUsuario{
   set nombreUsuario(String value) {
     _prefs.setString('nombre usuario', value);
   }
+
+
+        //GET y SET del la ultima pagina
+  String get ultimaPagina {
+    return _prefs.getString('ultimaPagina') ?? 'home';
+  }
+ 
+  set ultimaPagina(String value) {
+    _prefs.setString('ultimaPagina', value);
+  }
+
 
 }

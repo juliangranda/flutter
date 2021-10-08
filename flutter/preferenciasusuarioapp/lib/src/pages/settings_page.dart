@@ -25,6 +25,8 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    prefs.ultimaPagina = SettingsPage.routeName;
     _genero = prefs.genero;
     _colorSecundario = prefs.colorSecundario;
     _textController = new TextEditingController(text: prefs.nombreUsuario);
