@@ -27,7 +27,7 @@ class _Navegacion extends StatelessWidget {
 
 
     return BottomNavigationBar(
-      currentIndex: 0,
+      currentIndex: navegacionModel.paginaActual,
       onTap: (i) => navegacionModel.paginaActual = i,
       items: [
       BottomNavigationBarItem(icon: Icon(Icons.person_outline),title: Text('para ti')),
@@ -62,7 +62,7 @@ class _NavegacionModel with ChangeNotifier {
   int _paginaActual = 0;
 
 
-  int get paginaActual => this.paginaActual;
+  int get paginaActual => this._paginaActual;
   
   set paginaActual( int valor){
     this._paginaActual = valor;
