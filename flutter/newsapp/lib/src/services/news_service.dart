@@ -22,6 +22,7 @@ class NewsService with ChangeNotifier{
       final resp = await http.get(url);
 
       final newsResponse = newsResponseFromJson( resp.body );
+      
 
       //llamo todos los articulos con metodo http
       this.headlines.addAll(newsResponse.articles);
