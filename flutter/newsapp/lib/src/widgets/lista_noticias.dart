@@ -9,49 +9,84 @@ class ListaNoticias extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    
-
     return ListView.builder(
-      itemCount: this.noticias.length,
-      itemBuilder: ( _ , int index){
-        return _Noticia(noticia: this.noticias[index], index: index);
-      }
-      );
+        itemCount: this.noticias.length,
+        itemBuilder: (_, int index) {
+          return _Noticia(noticia: this.noticias[index], index: index);
+        });
   }
 }
 
 //main front
 class _Noticia extends StatelessWidget {
-  
   final Article noticia;
   final int index;
 
-  const _Noticia({required this.noticia,required this.index}) ;
+  const _Noticia({required this.noticia, required this.index});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _TarjetaTopBar( noticia: this.noticia , index: index),
-
+        _TarjetaTopBar(noticia: this.noticia, index: index),
         _TarjetaTitulo(noticia: this.noticia),
-
         _TarjetaImagen(noticia: this.noticia),
-
+        _TarjetaBody(noticia: this.noticia),
+        _TarjetaBotones(),
+        SizedBox(
+          height: 10,
+        ),
+        Divider(),
       ],
     );
   }
 }
 
+class _TarjetaBotones extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RawMaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              child: Icon(Icons.star_border),
+              fillColor: miTema.accentColor,
+              onPressed: () {}),
+          SizedBox(width: 10,),
 
+          RawMaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              child: Icon(Icons.more),
+              fillColor: Colors.blue,
+              onPressed: () {})
+        ],
+      ),
+    );
+  }
+}
 
+class _TarjetaBody extends StatelessWidget {
+  final Article noticia;
+
+  const _TarjetaBody({required this.noticia});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Text((noticia.description != null) ? noticia.description! : ''),
+    );
+  }
+}
 
 class _TarjetaTopBar extends StatelessWidget {
   final Article noticia;
   final int index;
-  const _TarjetaTopBar( {required this.noticia, required this.index}) ;
-
+  const _TarjetaTopBar({required this.noticia, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +95,11 @@ class _TarjetaTopBar extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 10),
       child: Row(
         children: [
-          Text('${index + 1}. ' ,style: TextStyle(color: miTema.accentColor),),
-          Text('${ noticia.source.name }. ' ),
+          Text(
+            '${index + 1}. ',
+            style: TextStyle(color: miTema.accentColor),
+          ),
+          Text('${noticia.source.name}. '),
         ],
       ),
     );
@@ -69,32 +107,41 @@ class _TarjetaTopBar extends StatelessWidget {
 }
 
 class _TarjetaTitulo extends StatelessWidget {
-  
   final Article noticia;
 
-  const _TarjetaTitulo({ required this.noticia}) ;
+  const _TarjetaTitulo({required this.noticia});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15),
-      child: Text(noticia.title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+      child: Text(noticia.title,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
     );
   }
 }
-
 
 class _TarjetaImagen extends StatelessWidget {
   final Article noticia;
 
   const _TarjetaImagen({required this.noticia});
-  
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('hola mundo'),
-      
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50), bottomRight: Radius.circular(50)),
+        child: Container(
+            child: (noticia.urlToImage != null)
+                ? FadeInImage(
+                    placeholder: AssetImage('assets/img/giphy.gif'),
+                    image: NetworkImage(noticia.urlToImage!))
+                : Image(
+                    image: AssetImage('assets/img/no-image.png'),
+                  )),
+      ),
     );
   }
 }
