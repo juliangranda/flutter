@@ -8,9 +8,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: Center(
-        child: Text('hola mundo'),
-        )
+      home: _TempHomeScreen()
+    );
+  }
+}
+
+class _TempHomeScreen extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children:[
+        Text('hola mundo'),
+        Text('hola mundo'),
+      ]
     );
   }
 }
