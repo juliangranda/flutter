@@ -39,6 +39,9 @@ class NewsService with ChangeNotifier{
 
   }
 
+  List<Article> get getArticulosCategoriaSeleccionada => this.categoryArticles[this.selectedCategory]!;
+
+
   String get selectedCategory => this._selectedCategory;
   set selectedCategory(String valor){
 
