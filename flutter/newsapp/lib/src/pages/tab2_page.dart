@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/src/models/category_model.dart';
 import 'package:newsapp/src/services/news_service.dart';
+import 'package:newsapp/src/theme/tema.dart';
 import 'package:provider/provider.dart';
 
 
@@ -57,6 +58,7 @@ class _CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final newsService = Provider.of<NewsService>(context, listen: false);
     return GestureDetector(
       onTap: (){
         //print('${categoria.name}');
@@ -73,7 +75,9 @@ class _CategoryButton extends StatelessWidget {
         ),
         child: Icon(
           categoria.icon,
-          color: Colors.black54,
+          color: (newsService.selectedCategory == this.categoria.name)
+          ?Colors.red
+          :Colors.black54,
         ),
       ),
     );
