@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 
 class ProductsService extends ChangeNotifier {
   final String _baseUrl = 'flutter-varios-3b505-default-rtdb.firebaseio.com';
+  //lista de productos que yo quiero mostrar en la pantalla 
   final List<Product> products = [];
   late Product selectedProduct;
 
@@ -25,6 +26,7 @@ class ProductsService extends ChangeNotifier {
   bool isloading = true;
   bool isSaving = false;
 
+//en el momento que se cree la primera instancia de ProductService se va a ejecutar loadproducts
   ProductsService() {
     this.loadProducts();
   }

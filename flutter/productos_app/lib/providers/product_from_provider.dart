@@ -10,6 +10,7 @@ class ProductFormProvider extends ChangeNotifier{
 
   ProductFormProvider(this.product);
 
+//funcion para hacer el cambio de estado el boton de disponibilidad
   updateAvailability(bool value){
     print(value);
     this.product.available = value;
